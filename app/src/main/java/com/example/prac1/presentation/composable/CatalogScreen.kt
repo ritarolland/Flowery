@@ -45,6 +45,13 @@ import com.example.prac1.R
 import com.example.prac1.domain.model.Flower
 import com.example.prac1.presentation.viewmodel.CatalogViewModel
 
+/**
+ * Catalog screen composable displaying a grid of flowers with search functionality
+ *
+ * @param catalogViewModel ViewModel managing catalog state and operations
+ * @param onItemClick Callback when a flower item is clicked
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun CatalogScreen(catalogViewModel: CatalogViewModel, onItemClick: (Flower) -> Unit) {
     val catalogItems by catalogViewModel.catalogItems.collectAsState(emptyList())
@@ -141,6 +148,15 @@ fun CatalogScreen(catalogViewModel: CatalogViewModel, onItemClick: (Flower) -> U
     }
 }
 
+/**
+ * Composable card representing a single flower item in the catalog
+ *
+ * @param flower Flower data to display
+ * @param isFavourite Whether the flower is marked as favorite
+ * @param onClick Callback when the flower card is clicked
+ * @param onFavourite Callback when favorite button is clicked
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun FlowerCard(flower: Flower, isFavourite: Boolean, onClick: () -> Unit, onFavourite: () -> Unit) {
     Card(

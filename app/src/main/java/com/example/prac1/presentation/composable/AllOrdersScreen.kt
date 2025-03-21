@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -28,7 +27,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,6 +36,14 @@ import com.example.prac1.R
 import com.example.prac1.data.api.model.OrderDataModel
 import com.example.prac1.presentation.viewmodel.AllOrdersViewModel
 
+/**
+ * Composable screen that displays a list of all orders
+ *
+ * @param allOrdersViewModel ViewModel that manages order data
+ * @param onOrderClick Callback when order is clicked
+ * @param navigateBack Callback for back navigation
+ * @author Sofia Bakalskaya
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AllOrdersScreen(allOrdersViewModel: AllOrdersViewModel, onOrderClick:(orderId: String) -> Unit, navigateBack:() -> Unit) {
@@ -88,6 +94,13 @@ fun AllOrdersScreen(allOrdersViewModel: AllOrdersViewModel, onOrderClick:(orderI
     }
 }
 
+/**
+ * Composable function for rendering individual order items
+ *
+ * @param order The order data model to display
+ * @param onItemClick Callback when the order is clicked
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun Order(order: OrderDataModel, onItemClick:() -> Unit) {
 

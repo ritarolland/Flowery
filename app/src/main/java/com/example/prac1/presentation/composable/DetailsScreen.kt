@@ -52,6 +52,17 @@ import com.example.prac1.domain.model.CartItem
 import com.example.prac1.domain.model.Flower
 import com.example.prac1.presentation.viewmodel.DetailsViewModel
 
+/**
+ * Details screen composable showing detailed information about a specific flower
+ * with parallax image effect and interactive controls
+ *
+ * @param flowerId ID of the flower to display details for
+ * @param isFavorite Function to check if flower is in favorites
+ * @param detailsViewModel ViewModel managing flower details state and cart operations
+ * @param navigateBack Callback for back navigation
+ * @param onFavourite Callback for favorite button click
+ * @author Sofia Bakalskaya
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalFoundationApi
 @Composable
@@ -218,95 +229,4 @@ fun DetailsScreen(
             }
         }
     }
-
-
-    /*Scaffold(
-        modifier = Modifier.padding(16.dp),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {},
-                navigationIcon = {
-                    Icon(painter = painterResource(R.drawable.arrow_back), contentDescription = null, modifier = Modifier.clip(
-                        CircleShape).clickable {
-                        navigateBack()
-                    })
-                }
-            )
-        }
-    ) { paddingValues ->
-        if (currentFlower == null) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
-        } else {
-            val flower = currentFlower as Flower
-            Column(
-                modifier = Modifier
-                    .padding(paddingValues)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                Card(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                        .wrapContentHeight(),
-                    elevation = CardDefaults.cardElevation(8.dp)
-                ) {
-                    Text(
-                        text = flower.name,
-                        modifier = Modifier.padding(8.dp),
-                        fontSize = 24.sp
-                    )
-
-                    GlideImage(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
-                            .aspectRatio(1f)
-                            .clip(RoundedCornerShape(8.dp)),
-                        imageUrl = flower.imageUrl,
-                        description = flower.name
-                    )
-
-
-                    Text(
-                        modifier = Modifier.padding(8.dp),
-                        text = flower.price.toString(),
-                        fontSize = 24.sp
-                    )
-                    if(cartItem == null) {
-                        Button(
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .fillMaxWidth(),
-                            onClick = {
-                                //start showing progress bar
-                                detailsViewModel.addItemToCart()
-                            }
-                        ) {
-                            Text(text = stringResource(id = R.string.add_to_cart))
-                        }
-                    } else {
-                        QuantitySelectionCard(cartItem!!.quantity) { quantity ->
-                            detailsViewModel.updateCartItemQuantity(
-                            itemId = cartItem!!.id,
-                            newQuantity = quantity
-                        ) }
-                    }
-
-                    Text(
-                        text = flower.description,
-                        modifier = Modifier.padding(8.dp)
-                    )
-
-                }
-                Spacer(modifier = Modifier.padding(8.dp))
-            }
-        }
-    }*/
 }

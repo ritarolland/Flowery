@@ -24,7 +24,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +33,14 @@ import com.example.prac1.R
 import com.example.prac1.domain.model.Flower
 import com.example.prac1.presentation.viewmodel.FavouritesViewModel
 
+/**
+ * Favorites screen composable displaying a grid of user's favorite flowers
+ *
+ * @param favouritesViewModel ViewModel managing favorite flowers state
+ * @param onItemClick Callback when a flower item is clicked
+ * @param navigateBack Callback for back navigation
+ * @author Sofia Bakalskaya
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavouritesScreen(

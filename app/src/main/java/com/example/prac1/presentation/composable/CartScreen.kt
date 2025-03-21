@@ -52,6 +52,15 @@ import com.example.prac1.domain.model.Flower
 import com.example.prac1.presentation.viewmodel.CartViewModel
 import java.sql.Timestamp
 
+/**
+ * Cart screen composable that displays user's cart items with selection and ordering functionality
+ *
+ * @param cartViewModel ViewModel managing cart state and operations
+ * @param onItemClick Callback when cart item is clicked
+ * @param onFavorite Callback when favorite button is clicked
+ * @param isFavorite Function to check if item is favorite
+ * @author Sofia Bakalskaya
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(
@@ -207,6 +216,20 @@ fun CartScreen(
     }
 }
 
+/**
+ * Composable card representing a single item in the cart
+ *
+ * @param flower Flower data to display
+ * @param cartItem Cart item data including quantity
+ * @param isSelectionMode Whether selection mode is active
+ * @param isChecked Whether item is currently selected
+ * @param onCheckedChange Callback when selection state changes
+ * @param onClick Callback when item is clicked
+ * @param onQuantityChange Callback when quantity changes
+ * @param onFavorite Callback when favorite button is clicked
+ * @param isFavorite Function to check if item is favorite
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun CartItemCard(
     flower: Flower,

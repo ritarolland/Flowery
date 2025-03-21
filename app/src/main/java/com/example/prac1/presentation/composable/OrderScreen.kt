@@ -23,8 +23,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -45,7 +43,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -59,6 +56,17 @@ import com.example.prac1.domain.model.CartItem
 import com.example.prac1.domain.model.Flower
 import com.example.prac1.presentation.viewmodel.OrderViewModel
 
+/**
+ * Order details screen composable showing information about a specific order
+ *
+ * @param orderId ID of the order to display
+ * @param orderViewModel ViewModel managing order data and state
+ * @param navigateBack Callback for back navigation
+ * @param onItemClick Callback when an order item is clicked
+ * @param onFavorite Callback when favorite button is clicked
+ * @param isFavorite Function to check if item is favorite
+ * @author Sofia Bakalskaya
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OrderScreen(
@@ -209,7 +217,16 @@ fun OrderScreen(
     }
 }
 
-
+/**
+ * Composable card representing a single item in an order
+ *
+ * @param flower Flower data to display
+ * @param cartItem Cart item data including quantity
+ * @param onClick Callback when item is clicked
+ * @param onFavorite Callback when favorite button is clicked
+ * @param isFavorite Function to check if item is favorite
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun OrderItemCard(
     flower: Flower,
@@ -297,7 +314,13 @@ fun OrderItemCard(
     }
 }
 
-
+/**
+ * Composable showing the quantity of an ordered item
+ *
+ * @param quantity Number of items ordered
+ * @param modifier Modifier for styling and layout
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun QuantityCard(
     quantity: Int,

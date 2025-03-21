@@ -28,22 +28,63 @@ import com.example.prac1.presentation.viewmodel.OrderViewModel
 import com.example.prac1.presentation.viewmodel.ProfileViewModel
 import javax.inject.Inject
 
+/**
+ * Main activity class serving as entry point for the application
+ *
+ * Manages ViewModel initialization and navigation between splash/main screens
+ *
+ * @author Sofia Bakalskaya
+ */
 class MainActivity : ComponentActivity() {
 
+    /**
+     * Navigation controller for app navigation
+     */
     private lateinit var navController: NavHostController
 
+    /**
+     * Dagger-injected ViewModel factory
+     */
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    /**
+     * ViewModel for product details
+     */
     private lateinit var detailsViewModel: DetailsViewModel
+    /**
+     * ViewModel for shopping cart
+     */
     private lateinit var cartViewModel: CartViewModel
+    /**
+     * ViewModel for product catalog
+     */
     private lateinit var catalogViewModel: CatalogViewModel
+    /**
+     * ViewModel for authentication
+     */
     private lateinit var authViewModel: AuthViewModel
+    /**
+     * ViewModel for user profile
+     */
     private lateinit var profileViewModel: ProfileViewModel
+    /**
+     * ViewModel for favorites
+     */
     private lateinit var favouritesViewModel: FavouritesViewModel
+    /**
+     * ViewModel for order history
+     */
     private lateinit var allOrdersViewModel: AllOrdersViewModel
+    /**
+     * ViewModel for order details
+     */
     private lateinit var orderViewModel: OrderViewModel
 
-
+    /**
+     * Initializes activity and sets up UI components
+     *
+     * @param savedInstanceState Saved instance state bundle
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -57,7 +98,7 @@ class MainActivity : ComponentActivity() {
         allOrdersViewModel = ViewModelProvider(this, viewModelFactory) [AllOrdersViewModel::class]
         orderViewModel = ViewModelProvider(this, viewModelFactory) [OrderViewModel::class]
         setContent {
-            var showSplash by remember { mutableStateOf(true) }
+            var showSplash by remember { mutableStateOf(false) }
             MaterialTheme {
                 navController = rememberNavController()
                 Surface(

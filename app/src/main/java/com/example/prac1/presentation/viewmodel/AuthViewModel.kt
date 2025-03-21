@@ -3,10 +3,8 @@ package com.example.prac1.presentation.viewmodel
 import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.prac1.data.repository.AuthResult
 import com.example.prac1.data.repository.AuthState
 import com.example.prac1.domain.repository.AuthRepository
 import com.example.prac1.domain.repository.UserUidRepository
@@ -16,12 +14,25 @@ import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
+/**
+ * ViewModel responsible for handling authentication logic, including sign-in, sign-up,
+ * image uploads, and authorization checks.
+ *
+ * @param authRepository Repository handling authentication operations.
+ * @param uidRepository Repository managing user UID retrieval.
+ *
+ * @author Sofia Bakalskaya
+ */
 class AuthViewModel @Inject constructor(private val authRepository: AuthRepository,
     private val uidRepository: UserUidRepository) : ViewModel() {
-    private val _signInState = MutableStateFlow<AuthState>(AuthState.Default)
-    val signInState = _signInState.asStateFlow()
 
+    /** StateFlow representing the authentication state (e.g., loading, success, error). */
+    private val _signInState = MutableStateFlow<AuthState>(AuthState.Default)
+    /** Publicly exposed authentication state to observe UI changes. */
+    val signInState = _signInState.asStateFlow()
+    /** StateFlow representing whether the user is authorized. */
     private val _isAuthorized = MutableStateFlow<Boolean?>(null)
+    /** Publicly exposed authorization state. */
     val isAuthorized = _isAuthorized.asStateFlow()
 
     init {
@@ -30,6 +41,13 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
         }
     }
 
+    /**
+     * Retrieves the real file path from a given URI.
+     *
+     * @param context The application context.
+     * @param contentUri The URI of the image file.
+     * @return The real file path as a string.
+     */
     private fun getRealPathFromURI(context: Context, contentUri: Uri): String {
         val cursor = context.contentResolver.query(contentUri, null, null, null, null)
         cursor?.let {
@@ -42,6 +60,13 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
         return ""
     }
 
+    /**
+     * Uploads an image to Supabase storage.
+     *
+     * @param imageUri The URI of the image to upload.
+     * @param context The application context.
+     * @return The URL of the uploaded image if successful, otherwise null.
+     */
     private suspend fun uploadImage(imageUri: Uri?, context: Context): String? {
         if (imageUri != null) {
             val imageFile = File(getRealPathFromURI(context, imageUri))
@@ -54,6 +79,12 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
         return null
     }
 
+    /**
+     * Handles the sign-in process.
+     *
+     * @param email The user's email.
+     * @param password The user's password.
+     */
     fun signIn(email: String, password: String) {
         _signInState.value = AuthState.Loading
         viewModelScope.launch {
@@ -65,6 +96,15 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
         }
     }
 
+    /**
+     * Handles the sign-up process, including user registration and optional profile image upload.
+     *
+     * @param email The user's email.
+     * @param password The user's password.
+     * @param imageUri Optional URI of the user's profile picture.
+     * @param context The application context.
+     * @param name The user's display name.
+     */
     fun signUp(email: String, password: String, imageUri: Uri?, context: Context, name: String) {
         _signInState.value = AuthState.Loading
         viewModelScope.launch {
@@ -83,11 +123,17 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
         }
     }
 
+    /**
+     * Checks whether the user is currently authorized.
+     */
     private suspend fun checkAuthorization() {
         val authorized = authRepository.isUserAuthorized()
         _isAuthorized.value = authorized
     }
 
+    /**
+     * Logs the user out and resets authentication state.
+     */
     fun logOut() {
         viewModelScope.launch {
             authRepository.logOut()

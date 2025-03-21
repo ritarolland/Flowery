@@ -23,6 +23,12 @@ import androidx.compose.ui.unit.sp
 import com.example.prac1.R
 import kotlinx.coroutines.delay
 
+/**
+ * Splash screen composable with app branding and loading delay
+ *
+ * @param onLoadingComplete Callback triggered after splash duration
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun SplashScreen(onLoadingComplete: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {

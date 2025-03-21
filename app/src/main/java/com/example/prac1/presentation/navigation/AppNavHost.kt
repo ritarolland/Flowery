@@ -25,6 +25,20 @@ import com.example.prac1.presentation.viewmodel.FavouritesViewModel
 import com.example.prac1.presentation.viewmodel.OrderViewModel
 import com.example.prac1.presentation.viewmodel.ProfileViewModel
 
+/**
+ * Main navigation host composable that defines all screens and their navigation routes
+ *
+ * @param navController Navigation controller for managing navigation between screens
+ * @param catalogViewModel ViewModel for catalog functionality
+ * @param detailsViewModel ViewModel for product details
+ * @param cartViewModel ViewModel for shopping cart
+ * @param profileViewModel ViewModel for user profile
+ * @param favouritesViewModel ViewModel for favorites
+ * @param allOrdersViewModel ViewModel for order history
+ * @param orderViewModel ViewModel for order processing
+ * @param logOut Callback for logout action
+ * @author Sofia Bakalskaya
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AppNavHost(
@@ -43,21 +57,33 @@ fun AppNavHost(
         startDestination = Screens.Catalog.route,
         modifier = Modifier.padding(PaddingValues(bottom = 56.dp))
     ) {
+        /**
+         * Catalog screen destination with flower details navigation
+         */
         composable(Screens.Catalog.route) {
             CatalogScreen(catalogViewModel = catalogViewModel) { flower ->
                 navController.navigate("details/${flower.id}")
             }
         }
+        /**
+         * Favorites screen destination with back navigation
+         */
         composable(Screens.Favourites.route) {
             FavouritesScreen(favouritesViewModel = favouritesViewModel, onItemClick = { flower ->
                 navController.navigate("details/${flower.id}")
             }, navigateBack = { navController.popBackStack() })
         }
+        /**
+         * Order history screen with order details navigation
+         */
         composable(Screens.AllOrders.route) {
             AllOrdersScreen(allOrdersViewModel = allOrdersViewModel, onOrderClick = { orderId ->
                 navController.navigate(Screens.Order.orderId(orderId))
             }, navigateBack = { navController.popBackStack() })
         }
+        /**
+         * Order details screen with dynamic orderId parameter
+         */
         composable(Screens.Order.route) { backStackEntry ->
             val orderId = backStackEntry.arguments?.getString("orderId")
             OrderScreen(orderId = orderId, orderViewModel = orderViewModel, navigateBack = {
@@ -68,7 +94,9 @@ fun AppNavHost(
                 onFavorite = { id -> catalogViewModel.toggleIsFavourite(id) },
                 isFavorite = { id -> catalogViewModel.isFavorite(id) })
         }
-        //Details
+        /**
+         * Product details screen with dynamic flowerId parameter
+         */
         composable("details/{flowerId}") { backStackEntry ->
             val flowerId = backStackEntry.arguments?.getString("flowerId")
             DetailsScreen(
@@ -78,6 +106,9 @@ fun AppNavHost(
                 navigateBack = { navController.popBackStack() },
                 onFavourite = { id -> catalogViewModel.toggleIsFavourite(id) })
         }
+        /**
+         * Shopping cart screen
+         */
         composable(Screens.Cart.route) {
             CartScreen(
                 cartViewModel = cartViewModel,
@@ -87,6 +118,9 @@ fun AppNavHost(
                     navController.navigate("details/${flower.id}")
                 })
         }
+        /**
+         * User profile screen with navigation to orders and favorites
+         */
         composable(Screens.Profile.route) {
             ProfileScreen(
                 viewModel = profileViewModel,

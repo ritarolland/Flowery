@@ -51,7 +51,15 @@ import androidx.compose.ui.unit.sp
 import com.example.prac1.R
 import com.example.prac1.presentation.viewmodel.ProfileViewModel
 
-
+/**
+ * Profile screen composable showing user information and navigation options
+ *
+ * @param viewModel ViewModel managing profile data and state
+ * @param navigateToFavourites Callback for favorites navigation
+ * @param navigateToOrders Callback for orders navigation
+ * @param logOut Callback for logout action
+ * @author Sofia Bakalskaya
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -196,6 +204,14 @@ fun ProfileScreen(
     }
 }
 
+/**
+ * Composable card item for profile screen navigation options
+ *
+ * @param imageVector Icon for the navigation item
+ * @param text Display text for the item
+ * @param onClick Callback when item is clicked
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun ProfileItemCard(
     imageVector: ImageVector,
@@ -243,6 +259,12 @@ fun ProfileItemCard(
     }
 }
 
+/**
+ * Gradient background box composable with dynamic gradient positioning
+ *
+ * @param modifier Modifier for styling and layout
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun GradientBackgroundBox(modifier: Modifier = Modifier) {
     var size by remember { mutableStateOf(IntSize.Zero) }

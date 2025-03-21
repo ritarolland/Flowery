@@ -2,7 +2,6 @@ package com.example.prac1.presentation.navigation
 
 import android.graphics.BlurMaskFilter
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,7 +22,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
@@ -41,6 +39,15 @@ import androidx.navigation.NavHostController
 import com.example.prac1.R
 import com.example.prac1.presentation.viewmodel.CatalogViewModel
 
+/**
+ * Composable function that represents the bottom navigation bar in the app.
+ * It allows users to navigate between different sections.
+ *
+ * @param navController Navigation controller managing screen transitions.
+ * @param catalogViewModel ViewModel for the catalog screen, used to reset search queries.
+ *
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun BottomNavigationBar(
     navController: NavHostController,
@@ -73,6 +80,17 @@ fun BottomNavigationBar(
     }
 }
 
+/**
+ * Modifier function that applies a shadow effect to a Composable.
+ *
+ * @param color Color of the shadow.
+ * @param borderRadius Corner radius of the shadow.
+ * @param blurRadius Blur intensity of the shadow.
+ * @param offsetX Horizontal offset of the shadow.
+ * @param offsetY Vertical offset of the shadow.
+ * @param spread Expansion of the shadow beyond the original element size.
+ * @param modifier Additional modifier to be applied.
+ */
 fun Modifier.shadow(
     color: Color = Color.Black,
     borderRadius: Dp = 0.dp,
@@ -111,6 +129,13 @@ fun Modifier.shadow(
     }
 )
 
+/**
+ * Custom bottom navigation bar layout.
+ *
+ * @param items List of bottom navigation items.
+ * @param currentRoute The currently selected navigation route.
+ * @param onItemClick Callback triggered when a navigation item is clicked.
+ */
 @Composable
 fun CustomBottomNavigation(
     items: List<BottomNavigationItem>,
@@ -171,6 +196,13 @@ fun CustomBottomNavigation(
 
 }
 
+/**
+ * Composable function representing a single item in the bottom navigation bar.
+ *
+ * @param item The navigation item to display.
+ * @param isSelected Whether the item is currently selected.
+ * @param modifier Modifier for layout customization.
+ */
 @Composable
 fun CustomBottomNavigationItem(
     item: BottomNavigationItem,

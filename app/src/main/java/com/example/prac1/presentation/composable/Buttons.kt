@@ -13,6 +13,16 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.example.prac1.R
 
+/**
+ * Custom filled button with predefined styles
+ *
+ * @param onClick Callback when button is clicked
+ * @param modifier Modifier for styling/layout
+ * @param enabled Controls button enabled state
+ * @param containerColor Background color of the button
+ * @param content Button content/label
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun CustomButtonFilled(
     onClick: () -> Unit,
@@ -37,6 +47,15 @@ fun CustomButtonFilled(
     }
 }
 
+/**
+ * Custom outlined button with border and transparent background
+ *
+ * @param onClick Callback when button is clicked
+ * @param modifier Modifier for styling/layout
+ * @param paddingValues Padding values for button content
+ * @param content Button content/label
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun CustomButtonOutlined(
     onClick: () -> Unit,

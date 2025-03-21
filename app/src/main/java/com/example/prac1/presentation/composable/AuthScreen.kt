@@ -45,6 +45,13 @@ import com.example.prac1.R
 import com.example.prac1.data.repository.AuthState
 import com.example.prac1.presentation.viewmodel.AuthViewModel
 
+/**
+ * Authentication screen with email/password fields and login functionality
+ *
+ * @param authViewModel ViewModel handling authentication logic
+ * @param onNavigateToRegister Callback for navigation to registration screen
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun AuthScreen(
     authViewModel: AuthViewModel,
@@ -237,6 +244,11 @@ fun AuthScreen(
     }
 }
 
+/**
+ * Visual transformation that obscures password characters with asterisks
+ *
+ * @author Sofia Bakalskaya
+ */
 class StarPasswordTransformation : VisualTransformation {
     override fun filter(text: AnnotatedString): TransformedText {
         return TransformedText(

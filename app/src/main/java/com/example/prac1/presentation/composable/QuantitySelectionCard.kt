@@ -22,6 +22,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.prac1.R
 
+/**
+ * Quantity selection card composable with increment/decrement controls
+ *
+ * @param quantity Current quantity value
+ * @param modifier Modifier for styling and layout
+ * @param onQuantityChange Callback when quantity changes (receives new quantity)
+ * @author Sofia Bakalskaya
+ */
 @Composable
 fun QuantitySelectionCard(
     quantity: Int,
